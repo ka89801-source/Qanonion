@@ -1,50 +1,42 @@
-const openModal = document.getElementById('openModal');
-const closeModal = document.getElementById('closeModal');
-const modal = document.getElementById('modal');
-const submitPost = document.getElementById('submitPost');
-const feed = document.getElementById('feed');
-const postText = document.getElementById('postText');
-const postTag = document.getElementById('postTag');
+const posBtns = document.querySelectorAll('.pos-btn');
+const selectedPosEl = document.getElementById('selected-pos');
+const publishBtn = document.getElementById('publish-btn');
+const titleInput = document.getElementById('title');
+const bodyInput = document.getElementById('body');
+const postsContainer = document.getElementById('posts-container');
 
-openModal.addEventListener('click', () => modal.classList.remove('hidden'));
-closeModal.addEventListener('click', () => modal.classList.add('hidden'));
+let currentPos = 'الرئيسية';
+let posts = [];
 
-modal.addEventListener('click', (e) => {
-  if (e.target === modal) modal.classList.add('hidden');
+posBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    posBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentPos = btn.dataset.pos;
+    selectedPosEl.textContent = currentPos;
+  });
 });
 
-submitPost.addEventListener('click', () => {
-  const text = postText.value.trim();
-  const tag = postTag.value.trim();
-  if (!text) return;
-
-  const post = document.createElement('div');
-  post.className = 'post';
-  post.innerHTML = `
-    <div class="post-header">
-      <div class="avatar sm">م</div>
-      <div>
-        <strong>محامي أحمد</strong>
-        <span class="badge">محامي</span>
-      </div>
-    </div>
-    <p class="post-text">${text}</p>
-    <div class="post-tags">${tag ? '<span>' + tag + '</span>' : ''}</div>
-    <div class="post-actions">
-      <button class="like-btn" onclick="toggleLike(this)">❤️ <span>0</span></button>
-      <button>💬 تعليق</button>
-      <button>🔗 مشاركة</button>
-    </div>
-  `;
-
-  feed.prepend(post);
-  postText.value = '';
-  postTag.value = '';
-  modal.classList.add('hidden');
+publishBtn.addEventListener('click', () => {
+  const title = titleInput.value.trim();
+  const body = bodyInput.value.trim();
+  if (!title) { alert('يرجى كتابة العنوان'); return; }
+  posts.unshift({ title, body, pos: currentPos });
+  titleInput.value = '';
+  bodyInput.value = '';
+  renderPosts();
 });
 
-function toggleLike(btn) {
-  const count = btn.querySelector('span');
-  const liked = btn.classList.toggle('liked');
-  count.textContent = liked ? parseInt(count.textContent) + 1 : parseInt(count.textContent) - 1;
+function renderPosts() {
+  if (posts.length === 0) {
+    postsContainer.innerHTML = '<p class="empty-msg">لا توجد منشورات بعد.</p>';
+    return;
+  }
+  postsContainer.innerHTML = posts.map(p => `
+    <div class="post-card">
+      <span class="post-position">${p.pos}</span>
+      <div class="post-title">${p.title}</div>
+      <div class="post-body">${p.body || ''}</div>
+    </div>
+  `).join('');
 }
