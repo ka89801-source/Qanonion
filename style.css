@@ -1,209 +1,171 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   font-family: 'Segoe UI', Tahoma, sans-serif;
-  background: #f0f2f5;
-  color: #1a1a2e;
+  background: #f4f6f9;
+  color: #222;
   direction: rtl;
 }
 
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.top-bar {
   background: #1a1a2e;
-  color: #fff;
-  padding: 14px 32px;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-.logo { font-size: 1.4rem; font-weight: bold; }
-
-.topbar nav a {
-  color: #ccc;
-  text-decoration: none;
-  margin-right: 20px;
-  font-size: 0.95rem;
-  transition: color 0.2s;
+.positions-label {
+  color: #aaa;
+  font-size: 14px;
+  white-space: nowrap;
 }
 
-.topbar nav a:hover { color: #fff; }
-
-.layout {
+.positions-list {
   display: flex;
-  gap: 24px;
-  max-width: 900px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pos-btn {
+  background: #2a2a4a;
+  color: #ccc;
+  border: 1px solid #444;
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.pos-btn:hover {
+  background: #3a3a6a;
+  color: #fff;
+}
+
+.pos-btn.active {
+  background: #e94560;
+  color: #fff;
+  border-color: #e94560;
+  font-weight: bold;
+}
+
+.container {
+  max-width: 720px;
   margin: 32px auto;
   padding: 0 16px;
-  align-items: flex-start;
 }
 
-.sidebar {
-  width: 240px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.selected-pos-banner {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  color: #856404;
 }
 
-.profile-card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 20px;
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-}
-
-.profile-card p { font-size: 0.8rem; color: #777; margin-top: 4px; }
-
-.avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #1a1a2e, #4a4a8a);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
+.selected-pos-banner span {
   font-weight: bold;
-  flex-shrink: 0;
+  color: #e94560;
 }
 
-.avatar.sm { width: 38px; height: 38px; font-size: 1rem; }
+.publish-form {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  margin-bottom: 32px;
+}
 
-.btn-post {
-  background: #1a1a2e;
+.publish-form h2 {
+  margin-bottom: 16px;
+  font-size: 18px;
+  color: #1a1a2e;
+}
+
+.publish-form input,
+.publish-form textarea {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  direction: rtl;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.publish-form input:focus,
+.publish-form textarea:focus {
+  border-color: #e94560;
+}
+
+.publish-form textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.publish-form button {
+  background: #e94560;
   color: #fff;
   border: none;
-  border-radius: 10px;
-  padding: 12px;
+  padding: 10px 28px;
+  border-radius: 8px;
+  font-size: 15px;
   cursor: pointer;
-  font-size: 1rem;
   transition: background 0.2s;
 }
 
-.btn-post:hover { background: #2d2d5e; }
+.publish-form button:hover {
+  background: #c73652;
+}
 
-.feed { flex: 1; display: flex; flex-direction: column; gap: 20px; }
+.posts-list h3 {
+  margin-bottom: 16px;
+  color: #1a1a2e;
+}
 
-.post {
+.post-card {
   background: #fff;
-  border-radius: 14px;
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-}
-
-.post-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
-}
-
-.badge {
-  background: #e8eaf6;
-  color: #3949ab;
-  font-size: 0.72rem;
-  padding: 2px 8px;
-  border-radius: 20px;
-  margin-right: 6px;
-}
-
-.post-text { font-size: 0.95rem; line-height: 1.7; color: #333; }
-
-.post-tags { margin-top: 10px; }
-
-.post-tags span {
-  color: #3949ab;
-  font-size: 0.85rem;
-  margin-left: 8px;
-}
-
-.post-actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 14px;
-}
-
-.post-actions button {
-  background: none;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 6px 14px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  transition: background 0.15s;
-}
-
-.post-actions button:hover { background: #f5f5f5; }
-
-.like-btn.liked { background: #fce4ec; border-color: #f48fb1; }
-
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 200;
-}
-
-.modal.hidden { display: none; }
-
-.modal-box {
-  background: #fff;
-  border-radius: 16px;
-  padding: 28px;
-  width: 460px;
-  max-width: 95%;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.modal-box h3 { font-size: 1.1rem; }
-
-textarea, input[type="text"] {
-  width: 100%;
-  border: 1px solid #ddd;
   border-radius: 10px;
-  padding: 12px;
-  font-size: 0.95rem;
-  font-family: inherit;
-  resize: none;
-  direction: rtl;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  border-right: 4px solid #e94560;
 }
 
-textarea { height: 120px; }
-
-.modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
-
-.btn-submit {
-  background: #1a1a2e;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 22px;
-  cursor: pointer;
-  font-size: 0.95rem;
+.post-card .post-position {
+  font-size: 11px;
+  background: #f0f0f0;
+  color: #555;
+  padding: 2px 8px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-bottom: 6px;
 }
 
-.btn-cancel {
-  background: #eee;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 18px;
-  cursor: pointer;
-  font-size: 0.95rem;
+.post-card .post-title {
+  font-weight: bold;
+  margin-bottom: 4px;
 }
 
-@media (max-width: 640px) {
-  .layout { flex-direction: column; }
-  .sidebar { width: 100%; }
+.post-card .post-body {
+  font-size: 13px;
+  color: #555;
+}
+
+.empty-msg {
+  color: #aaa;
+  font-size: 14px;
+  text-align: center;
+  padding: 20px 0;
 }
