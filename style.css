@@ -1,64 +1,209 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f0f4f8;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background: #f0f2f5;
+  color: #1a1a2e;
   direction: rtl;
 }
 
-.container {
-  background-color: #ffffff;
-  border-radius: 16px;
-  padding: 48px 40px;
-  text-align: center;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  width: 90%;
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1a1a2e;
+  color: #fff;
+  padding: 14px 32px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-h1 {
-  font-size: 2rem;
-  color: #1a202c;
+.logo { font-size: 1.4rem; font-weight: bold; }
+
+.topbar nav a {
+  color: #ccc;
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.topbar nav a:hover { color: #fff; }
+
+.layout {
+  display: flex;
+  gap: 24px;
+  max-width: 900px;
+  margin: 32px auto;
+  padding: 0 16px;
+  align-items: flex-start;
+}
+
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profile-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.profile-card p { font-size: 0.8rem; color: #777; margin-top: 4px; }
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1a1a2e, #4a4a8a);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.avatar.sm { width: 38px; height: 38px; font-size: 1rem; }
+
+.btn-post {
+  background: #1a1a2e;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.btn-post:hover { background: #2d2d5e; }
+
+.feed { flex: 1; display: flex; flex-direction: column; gap: 20px; }
+
+.post {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 12px;
 }
 
-p {
-  font-size: 1rem;
-  color: #718096;
-  margin-bottom: 28px;
+.badge {
+  background: #e8eaf6;
+  color: #3949ab;
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-right: 6px;
 }
 
-.btn {
-  background-color: #4f46e5;
-  color: #ffffff;
-  border: none;
-  border-radius: 10px;
-  padding: 14px 36px;
-  font-size: 1.1rem;
+.post-text { font-size: 0.95rem; line-height: 1.7; color: #333; }
+
+.post-tags { margin-top: 10px; }
+
+.post-tags span {
+  color: #3949ab;
+  font-size: 0.85rem;
+  margin-left: 8px;
+}
+
+.post-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.post-actions button {
+  background: none;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 6px 14px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.1s ease;
+  font-size: 0.85rem;
+  transition: background 0.15s;
 }
 
-.btn:hover {
-  background-color: #4338ca;
+.post-actions button:hover { background: #f5f5f5; }
+
+.like-btn.liked { background: #fce4ec; border-color: #f48fb1; }
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
 }
 
-.btn:active {
-  transform: scale(0.97);
+.modal.hidden { display: none; }
+
+.modal-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px;
+  width: 460px;
+  max-width: 95%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
-.message {
-  margin-top: 20px;
-  font-size: 1rem;
-  color: #38a169;
-  font-weight: bold;
-  min-height: 24px;
+.modal-box h3 { font-size: 1.1rem; }
+
+textarea, input[type="text"] {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  resize: none;
+  direction: rtl;
+}
+
+textarea { height: 120px; }
+
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+
+.btn-submit {
+  background: #1a1a2e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 22px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.btn-cancel {
+  background: #eee;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 640px) {
+  .layout { flex-direction: column; }
+  .sidebar { width: 100%; }
 }
