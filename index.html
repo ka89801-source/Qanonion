@@ -3,41 +3,57 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>منصة النشر</title>
+  <title>موقعي</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <header class="top-bar">
-    <div class="positions-label">موضع النشر:</div>
-    <div class="positions-list">
-      <button class="pos-btn active" data-pos="الرئيسية">الرئيسية</button>
-      <button class="pos-btn" data-pos="الأخبار">الأخبار</button>
-      <button class="pos-btn" data-pos="التقارير">التقارير</button>
-      <button class="pos-btn" data-pos="المقالات">المقالات</button>
-      <button class="pos-btn" data-pos="الإعلانات">الإعلانات</button>
+  <header class="header">
+    <div class="container">
+      <h1 class="logo">موقعي</h1>
+      <button class="menu-btn" id="menuBtn" aria-label="فتح القائمة">&#9776;</button>
+      <nav class="nav" id="nav">
+        <ul>
+          <li><a href="#home">الرئيسية</a></li>
+          <li><a href="#about">عن الموقع</a></li>
+          <li><a href="#contact">تواصل معنا</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
-  <main class="container">
-    <div class="selected-pos-banner">
-      النشر في: <span id="selected-pos">الرئيسية</span>
-    </div>
-
-    <section class="publish-form">
-      <h2>نشر محتوى جديد</h2>
-      <input type="text" id="title" placeholder="عنوان المحتوى" />
-      <textarea id="body" placeholder="اكتب المحتوى هنا..."></textarea>
-      <button id="publish-btn">نشر الآن</button>
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <h2>مرحبًا بك في موقعنا</h2>
+        <p>تصميم بسيط وسريع يعمل على جميع الأجهزة</p>
+        <a href="#contact" class="btn">تواصل معنا</a>
+      </div>
     </section>
 
-    <section class="posts-list" id="posts-list">
-      <h3>المنشورات</h3>
-      <div id="posts-container">
-        <p class="empty-msg">لا توجد منشورات بعد.</p>
+    <section class="about" id="about">
+      <div class="container">
+        <h2>عن الموقع</h2>
+        <p>موقع متجاوب يعمل بكفاءة على الهاتف والحاسوب والتابلت.</p>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container">
+        <h2>تواصل معنا</h2>
+        <form id="contactForm">
+          <input type="text" placeholder="اسمك" required />
+          <input type="email" placeholder="بريدك الإلكتروني" required />
+          <textarea placeholder="رسالتك" rows="4" required></textarea>
+          <button type="submit" class="btn">إرسال</button>
+        </form>
+        <p id="formMsg" class="form-msg hidden">تم الإرسال بنجاح!</p>
       </div>
     </section>
   </main>
+
+  <footer>
+    <p>جميع الحقوق محفوظة &copy; 2025</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
