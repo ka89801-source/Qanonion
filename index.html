@@ -3,64 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>قانوني</title>
+  <title>منصة النشر</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <header class="topbar">
-    <span class="logo">⚖️ قانوني</span>
-    <nav>
-      <a href="#">الرئيسية</a>
-      <a href="#">استكشاف</a>
-    </nav>
+  <header class="top-bar">
+    <div class="positions-label">موضع النشر:</div>
+    <div class="positions-list">
+      <button class="pos-btn active" data-pos="الرئيسية">الرئيسية</button>
+      <button class="pos-btn" data-pos="الأخبار">الأخبار</button>
+      <button class="pos-btn" data-pos="التقارير">التقارير</button>
+      <button class="pos-btn" data-pos="المقالات">المقالات</button>
+      <button class="pos-btn" data-pos="الإعلانات">الإعلانات</button>
+    </div>
   </header>
 
-  <main class="layout">
+  <main class="container">
+    <div class="selected-pos-banner">
+      النشر في: <span id="selected-pos">الرئيسية</span>
+    </div>
 
-    <aside class="sidebar">
-      <div class="profile-card">
-        <div class="avatar">م</div>
-        <div>
-          <strong>محامي أحمد</strong>
-          <p>متخصص في القانون التجاري</p>
-        </div>
-      </div>
-      <button class="btn-post" id="openModal">+ نشر منشور</button>
-    </aside>
-
-    <section class="feed" id="feed">
-      <div class="post">
-        <div class="post-header">
-          <div class="avatar sm">س</div>
-          <div>
-            <strong>سارة القحطاني</strong>
-            <span class="badge">محامية</span>
-          </div>
-        </div>
-        <p class="post-text">عقد الإيجار يجب أن يتضمن مدة الإيجار، قيمة الإيجار، وشروط الإنهاء. غياب أي منها قد يُفقد العقد قوته القانونية.</p>
-        <div class="post-tags"><span>#عقود</span> <span>#إيجار</span></div>
-        <div class="post-actions">
-          <button class="like-btn" onclick="toggleLike(this)">❤️ <span>12</span></button>
-          <button>💬 تعليق</button>
-          <button>🔗 مشاركة</button>
-        </div>
-      </div>
+    <section class="publish-form">
+      <h2>نشر محتوى جديد</h2>
+      <input type="text" id="title" placeholder="عنوان المحتوى" />
+      <textarea id="body" placeholder="اكتب المحتوى هنا..."></textarea>
+      <button id="publish-btn">نشر الآن</button>
     </section>
 
-  </main>
-
-  <div class="modal hidden" id="modal">
-    <div class="modal-box">
-      <h3>نشر محتوى قانوني</h3>
-      <textarea id="postText" placeholder="اكتب منشورك القانوني..."></textarea>
-      <input type="text" id="postTag" placeholder="الوسم مثال: #عقود" />
-      <div class="modal-actions">
-        <button class="btn-submit" id="submitPost">نشر</button>
-        <button class="btn-cancel" id="closeModal">إلغاء</button>
+    <section class="posts-list" id="posts-list">
+      <h3>المنشورات</h3>
+      <div id="posts-container">
+        <p class="empty-msg">لا توجد منشورات بعد.</p>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
   <script src="script.js"></script>
 </body>
