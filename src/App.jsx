@@ -742,3 +742,4 @@ function ProfilePage({ user, posts, currentUser, onLike, onComment, setSelectedP
     </div>
   );
 }
+
